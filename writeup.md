@@ -224,7 +224,7 @@ So I tried using this exploit I found on GitHub. For any pentest exams, google d
 
 https://github.com/Immersive-Labs-Sec/CVE-2025-31161
 
-![Github screenshot](Screenshots/)githubauthbypass.png
+![Github screenshot](Screenshots/githubauthbypass.png)
 
 First, I downloaded the exploit using git clone
 
