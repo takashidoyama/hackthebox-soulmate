@@ -395,15 +395,15 @@ This shows the banner `SSH-2.0-Erlang/5.2.9`
 
 So it turned out it was NOT VULNERABLE to the following: 
 
-<del> This has the following vulnerability: 
+<del> This has the following vulnerability: </del>
 
-CVE-2025-32433
+<del> CVE-2025-32433 </del>
 
-https://github.com/platsecurity/CVE-2025-32433
+<del> https://github.com/platsecurity/CVE-2025-32433 </del>
 
-![Github page for the above](Screenshots/lpe_github_page.png)
+<del> ![Github page for the above](Screenshots/lpe_github_page.png) </del>
 
-In the `build_channel_request` function, you can specify the payload. The default is set to `'file:write_file("/lab.txt", <<"pwned">>).'` which will write lab.txt with root privileges. Erlang has the ability to execute arbitrary OS commands, so we will use this to get a reverse shell</del>
+<del>In the `build_channel_request` function, you can specify the payload. The default is set to `'file:write_file("/lab.txt", <<"pwned">>).'` which will write lab.txt with root privileges. Erlang has the ability to execute arbitrary OS commands, so we will use this to get a reverse shell</del>
 
 Instead I have found that authing into the ssh on port 2222 returned an Erlang Eshell by accessing ssh internally. So from the ben account on the box, I used the following command
 
