@@ -195,6 +195,22 @@ Therefore we will now edit the `/etc/hosts` file to connect the hostname to the 
 
 `10.10.11.86 soulmate.htb`
 
+# Enumerating http://soulmate.htb
+
+This is the landing page 
+
+![Landing Page](Screenshots/landingpage.png)
+
+In this page, there is a login page and a page to register accounts. I will visit the register page to create a test account.
+
+![Create Account](Screenshots/createaccount.png)
+
+And now at the login page on http://soulmate.htb/login.php we can authenticate
+
+![Login](Screenshots/loginpage.png)
+
+![Gateway timeout](Screenshots/timeout.png)
+
 # VHOST enumeration
 
 The following command was used to enumerate VHOSTs. VHOSTs is short for Virtual Hosts, and is used to host multiple domain names on one single server. 
@@ -393,6 +409,8 @@ Now we can better internally enumerate the Erlang ssh server.
 
 This shows the banner `SSH-2.0-Erlang/5.2.9`
 
+### Dead End: CVE-2025-32433
+
 So it turned out it was NOT VULNERABLE to the following: 
 
 <del> This has the following vulnerability: </del>
@@ -404,6 +422,8 @@ So it turned out it was NOT VULNERABLE to the following:
 <del> ![Github page for the above](Screenshots/lpe_github_page.png) </del>
 
 <del>In the `build_channel_request` function, you can specify the payload. The default is set to `'file:write_file("/lab.txt", <<"pwned">>).'` which will write lab.txt with root privileges. Erlang has the ability to execute arbitrary OS commands, so we will use this to get a reverse shell</del>
+
+## Privilege Escalaction to Root
 
 Instead I have found that authing into the ssh on port 2222 returned an Erlang Eshell by accessing ssh internally. So from the ben account on the box, I used the following command
 
@@ -463,22 +483,8 @@ And now just a matter of switching to root
 
 ![pwn](Screenshots/pwn.png)
 
-User hash: b9de3e5ec6fad326b54d8e60c0e18b7f
-Root hash: 1cd673944dcbc8840c6aa7d938856a52
-
-This is the landing page 
-
-![Landing Page](Screenshots/landingpage.png)
-
-In this page, there is a login page and a page to register accounts. I will visit the register page to create a test accound
-
-![Create Account](Screenshots/createaccount.png)
-
-And now at the login page on http://soulmate.htb/login.php we can authenticate
-
-![Login](Screenshots/loginpage.png)
-
-![Gateway timeout](Screenshots/timeout.png)
+User hash: b9d<REDACTED>b7f
+Root hash: 1cd<REDACTED>a52
 
 
 
