@@ -2,8 +2,13 @@
 
 ## Summary
 
-Soulmate is an easy Linux box released on 6th September 2025. On initial enumeration, ports 22, 80 and 4369 were found, which were running a SSH server, a HTTP web server and something called Erlang which I wasn't familiar with. 
+Soulmate is an easy Linux box released on 6th September 2025. On initial enumeration, ports 22, 80 and 4369 were found, which were running a SSH server, a HTTP web server and something called Erlang which I wasn't familiar with. Enumeration of the web server on Port 80 revealed two web applications in total, one of which has a known vulnerability with a CVE number. This allowed an authentication bypass attack on this application, which allowed me to upload a PHP file. The PHP file was used to gain access to the host via Remote Code Execution. 
 
+Initial foothold gave me privileges as www-data which has very low privileges. After enumerating some files, I was able to find credentials for the user ben, and gained access to the host as ben. This was great, because not only did I have more privileges compared to www-data, I could also have a way of re-gaining access without having to go through the exploit chain leading to www-data. 
+
+Final privilege escalation to root required me to understand why the Erlang port was present initially. This port could easily have been a rabbit hole for say, certain four-letter hacking exams, but this turned out to be a hint to gaining local privilege escalation. 
+
+## Initial Reconnaissacne
 
 To make things easy, I will set the ip variable to be the ip address of our box. This will make inputting commands easier as you don't have to remember what the target's IP address was. 
 
