@@ -483,8 +483,8 @@ And now just a matter of switching to root
 
 ![pwn](Screenshots/pwn.png)
 
-User hash: b9d<REDACTED>b7f
-Root hash: 1cd<REDACTED>a52
+User hash: b9dREDACTEDb7f
+Root hash: 1cdREDACTEDa52
 
 
 
