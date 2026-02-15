@@ -1,6 +1,6 @@
 # Soulmate
 
-![Pwn screenshot](Screenshots/Screenshot 2025-11-30 at 18.37.35.png)
+![Pwn screenshot](Screenshots/"Screenshot 2025-11-30 at 18.37.35.png")
 
 ## Summary
 
