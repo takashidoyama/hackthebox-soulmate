@@ -1,5 +1,7 @@
 # Soulmate
 
+![Pwn screenshot](Screenshots/Screenshot 2025-11-30 at 18.37.35.png)
+
 ## Summary
 
 Soulmate is an easy Linux box released on 6th September 2025. On initial enumeration, ports 22, 80 and 4369 were found, which were running a SSH server, a HTTP web server and something called Erlang which I wasn't familiar with. Enumeration of the web server on Port 80 revealed two web applications in total, one of which has a known vulnerability with a CVE number. This allowed an authentication bypass attack on this application, which allowed me to upload a PHP file. The PHP file was used to gain access to the host via Remote Code Execution. 
