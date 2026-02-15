@@ -1,5 +1,9 @@
 # Soulmate
 
+## Summary
+
+Soulmate is an easy Linux box released on 6th September 2025. On initial enumeration, ports 22, 80 and 4369 were found, which were running a SSH server, a HTTP web server and something called Erlang which I wasn't familiar with. 
+
 
 To make things easy, I will set the ip variable to be the ip address of our box. This will make inputting commands easier as you don't have to remember what the target's IP address was. 
 
@@ -274,7 +278,7 @@ Access http://soulmate.htb/donchan91.php (or whatever you've named your shell to
 
 ## Enum as www-data
 
-Inside `/var/www/soulmate.htb/config/config.php` we have the following line:
+Inside `/var/www/soulmate.htb/config/config.php` we have the following line (password has been redacted):
 
 
 ```
@@ -283,7 +287,7 @@ Inside `/var/www/soulmate.htb/config/config.php` we have the following line:
         $adminCheck->execute(['admin']);
         
         if ($adminCheck->fetchColumn() == 0) {
-            $adminPassword = password_hash('Crush4dmin990', PASSWORD_DEFAULT);
+            $adminPassword = password_hash('<REDACTED>', PASSWORD_DEFAULT);
             $adminInsert = $this->pdo->prepare("
                 INSERT INTO users (username, password, is_admin, name) 
                 VALUES (?, ?, 1, 'Administrator')
@@ -343,7 +347,7 @@ main(_) ->
             true
         end},
         {auth_methods, "publickey,password"},
-        {user_passwords, [{"ben", "HouseH0ldings998"}]},
+        {user_passwords, [{"ben", "<REDACTED>"}]},
         {idle_time, infinity},
         {max_channels, 10},
         {max_sessions, 10},
@@ -361,7 +365,7 @@ main(_) ->
 
 ## Shell as ben
 
-We have a password in plaintext, ben:HouseH0ldings998
+We have a password in plaintext for the user ben (I've redacted the password sorry!)
 
 Authenticate into the host using these creds
 
@@ -372,7 +376,7 @@ Authenticate into the host using these creds
 
 ## Enum as ben
 
-Now we can better internally enumerate the Erlang ssh thing. 
+Now we can better internally enumerate the Erlang ssh server. 
 
 `nc -nv 127.0.0.1 2222`
 
@@ -380,7 +384,6 @@ Now we can better internally enumerate the Erlang ssh thing.
 ![Erlang from inside](Screenshots/erlang_nc_int.png)
 
 This shows the banner `SSH-2.0-Erlang/5.2.9`
-
 
 So it turned out it was NOT VULNERABLE to the following: 
 
@@ -434,7 +437,7 @@ First I added my username using the adduser command
 
 Then I added a password and also set sudo privileges using the following commands:
 
-`os:cmd("echo 'donchan91:gjhurie2sm2uiroa' | chpasswd").`
+`os:cmd("echo 'donchan91:<REDACTED>' | chpasswd").`
 
 `os:cmd("usermod -aG sudo donchan91").`
 
@@ -471,20 +474,4 @@ And now at the login page on http://soulmate.htb/login.php we can authenticate
 
 
 
-
-
-
-
-
-#Enumerating EPMD
-
-The following command could be used to enumerate EPMD
-
-`echo -n -e "\x00\x01\x6e" | nc -nv $ip 4369`
-
-![EPMD Enum](Screenshots/epmd_ssh_runner.png)
-
-If we can leak the authetication cookie, it is possible to achieve Remote Code Execution on the host. 
-
-https://angelica.gitbook.io/hacktricks/network-services-pentesting/4369-pentesting-erlang-port-mapper-daemon-epmd
 
