@@ -189,7 +189,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 ```
 Trying to access the web application on Port 80 leads to the following screenshot, showing the hostname
 
-<img width="1333" height="761" alt="image" src="https://github.com/user-attachments/assets/a26dbc6e-acfc-464c-b6d1-ed90cc24cd93" />
+![Landing Page](Screenshots/hostname.png)
 
 Therefore we will now edit the `/etc/hosts` file to connect the hostname to the IP address
 
